@@ -3,11 +3,16 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private Rigidbody _playerRb;
     private RoadLane _currentLane = RoadLane.Center;
     private bool _madeTurn;
     private Coroutine _moveCoroutine;
     private float currentLaneX = 0f;
     private int _playerStepWidth = 2;
+    private void Awake()
+    {
+        _playerRb = GetComponent<Rigidbody>();
+    }
     public void HandleMovement(float turnValue, bool isJumping)
     {
         HandleTurning(turnValue);
@@ -36,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
     private void SwitchLane(float direction)
     {
         float targetX = currentLaneX;
-        Vector3 targetPos;
         switch (direction)
         {
             case -1:
@@ -44,13 +48,15 @@ public class PlayerMovement : MonoBehaviour
                 _currentLane = DecideLane((RoadLane)direction);
                 _madeTurn = true;
                 break;
+            case 0:
+                return;
             case 1:
                 targetX = currentLaneX + _playerStepWidth;
                 _currentLane = DecideLane((RoadLane)direction);
                 _madeTurn = true;
                 break;
         }
-        targetPos = new Vector3(targetX, transform.position.y, transform.position.z);
+        Vector3 targetPos = new Vector3(targetX, transform.position.y, transform.position.z);
         if (_moveCoroutine != null)
         {
             StopCoroutine(_moveCoroutine);
@@ -76,20 +82,25 @@ public class PlayerMovement : MonoBehaviour
     }
     private IEnumerator MoveToPosition(Vector3 targetPosition, float finalLaneX)
     {
+        print("AM HERE");
         Vector3 startPosition = transform.position;
         float distance = Vector3.Distance(startPosition, targetPosition);
         float baseDuration = 0.2f;
         float duration = baseDuration * (distance / _playerStepWidth);
         float elapsed = 0f;
+        float velocityX = (targetPosition.x - startPosition.x) / duration;
 
+        _playerRb.linearVelocity = new Vector3(velocityX, 
+            _playerRb.linearVelocity.y, _playerRb.linearVelocity.z);
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsed / duration);
             yield return null;
         }
 
-        transform.position = targetPosition;
+        _playerRb.linearVelocity = new Vector3(0f,
+           _playerRb.linearVelocity.y, _playerRb.linearVelocity.z);
+        transform.position = new Vector3(finalLaneX, transform.position.y, transform.position.z);
         currentLaneX = finalLaneX;
     }
 }
