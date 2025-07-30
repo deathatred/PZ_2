@@ -12,10 +12,6 @@ public class PlayerInputHandler : MonoBehaviour, IPlayerInputActionsMapActions
         InputManager.EnablePlayerInput();
         InputManager.SubscribeToPlayerInput(this);
     }
-    private void Update()
-    {
-        print(MovementInput);
-    }
     private void OnDisable()
     {
         InputManager.DisablePlayerInput();
@@ -40,7 +36,12 @@ public class PlayerInputHandler : MonoBehaviour, IPlayerInputActionsMapActions
     {
         if (context.performed)
         {
-           MovementInput = context.ReadValue<float>();
+            MovementInput = context.ReadValue<float>();
         }
+        if (context.canceled)
+        {
+            MovementInput = 0f;
+        }
+
     }
 }
