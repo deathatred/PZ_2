@@ -24,7 +24,7 @@ public class PlayerCore : MonoBehaviour
             Debug.LogError($"Player Input Script is not found on {this.name}");
         }
     }
-    void Update()
+    void FixedUpdate()
     {
         _playerMovement.HandleMovement(_playerInputHandler.MovementInput,
             _playerInputHandler.JumpPressed);

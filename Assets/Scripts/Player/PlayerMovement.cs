@@ -3,12 +3,20 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private Transform _groundCheckPoint;
+    [SerializeField] private float _fallMultiplier = 2.5f;
+    [SerializeField] private float _lowJumpMultiplier = 2f;
+
     private Rigidbody _playerRb;
     private RoadLane _currentLane = RoadLane.Center;
     private bool _madeTurn;
     private Coroutine _moveCoroutine;
     private float currentLaneX = 0f;
     private int _playerStepWidth = 2;
+    private float _jumpForce = 5f;
+    private float _jumpTimer = 0f;
+    private float _jumpTimerMax = 0.5f;
+
     private void Awake()
     {
         _playerRb = GetComponent<Rigidbody>();
@@ -16,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public void HandleMovement(float turnValue, bool isJumping)
     {
         HandleTurning(turnValue);
+        HandleJumping(isJumping);
     }
     private void HandleTurning(float turnValue)
     {
@@ -36,6 +45,22 @@ public class PlayerMovement : MonoBehaviour
             {
                 SwitchLane(turnValue);
             }
+        }
+    }
+    private void HandleJumping(bool isJumping)
+    {
+        if (isJumping && isGrounded() && _jumpTimer <= 0)
+        {
+            _playerRb.AddForce(Vector3.up * _jumpForce, ForceMode.VelocityChange);
+            _jumpTimer = _jumpTimerMax;
+        }
+        if (_jumpTimer > 0)
+        {
+            if (_playerRb.linearVelocity.y < 0)
+            {
+                Physics.gravity *= 10f;
+            }
+            _jumpTimer -= Time.deltaTime;
         }
     }
     private void SwitchLane(float direction)
@@ -85,12 +110,12 @@ public class PlayerMovement : MonoBehaviour
         print("AM HERE");
         Vector3 startPosition = transform.position;
         float distance = Vector3.Distance(startPosition, targetPosition);
-        float baseDuration = 0.2f;
+        float baseDuration = 0.25f;
         float duration = baseDuration * (distance / _playerStepWidth);
         float elapsed = 0f;
         float velocityX = (targetPosition.x - startPosition.x) / duration;
 
-        _playerRb.linearVelocity = new Vector3(velocityX, 
+        _playerRb.linearVelocity = new Vector3(velocityX,
             _playerRb.linearVelocity.y, _playerRb.linearVelocity.z);
         while (elapsed < duration)
         {
@@ -102,6 +127,11 @@ public class PlayerMovement : MonoBehaviour
            _playerRb.linearVelocity.y, _playerRb.linearVelocity.z);
         transform.position = new Vector3(finalLaneX, transform.position.y, transform.position.z);
         currentLaneX = finalLaneX;
+    }
+    private bool isGrounded()
+    {
+        return Physics.Raycast(_groundCheckPoint.transform.position,
+            Vector3.down, 0.2f, ~0, QueryTriggerInteraction.Ignore);
     }
 }
 

@@ -44,4 +44,8 @@ public class PlayerInputHandler : MonoBehaviour, IPlayerInputActionsMapActions
         }
 
     }
+    public void SetJumpPressedFalse()
+    {
+        JumpPressed = false;
+    }
 }
