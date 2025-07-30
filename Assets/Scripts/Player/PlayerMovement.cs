@@ -4,8 +4,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Transform _groundCheckPoint;
-    [SerializeField] private float _fallMultiplier = 2.5f;
-    [SerializeField] private float _lowJumpMultiplier = 2f;
 
     private Rigidbody _playerRb;
     private RoadLane _currentLane = RoadLane.Center;
