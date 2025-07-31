@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4608627962559557190}
   - component: {fileID: 5419132542859199916}
-  - component: {fileID: 2969420247664357437}
   m_Layer: 0
   m_Name: RoadSegmentRoot
   m_TagString: Untagged
@@ -48,19 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _obstacleSpawnPoints: []
   speed: 5
---- !u!114 &2969420247664357437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1041726102026689938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfe7b2692131126429ac7144358482e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _obstacleSpawnPrefab: {fileID: 2832299650340184021, guid: 7547032ba15270b4fb8e2fd266a4007c, type: 3}
 --- !u!1 &7608735315126633054
 GameObject:
   m_ObjectHideFlags: 0

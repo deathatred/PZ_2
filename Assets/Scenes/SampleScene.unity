@@ -206,11 +206,11 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.16839717, y: -0, z: -0, w: 0.9857192}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 2, z: -3.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 343963439}
   m_LocalEulerAnglesHint: {x: 19.389, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
@@ -421,6 +421,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1447433922}
+  - {fileID: 330585546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &343963440
@@ -556,6 +557,51 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &571722990
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 571722992}
+  - component: {fileID: 571722991}
+  m_Layer: 0
+  m_Name: RoadObstacleSpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &571722991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571722990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfe7b2692131126429ac7144358482e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _obstacleSpawnPrefab: {fileID: 4676855845705433594, guid: 7547032ba15270b4fb8e2fd266a4007c, type: 3}
+--- !u!4 &571722992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571722990}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.7599974, y: -1.6806678, z: -6.384293}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,44 +682,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1447433921
+--- !u!1 &1409685692 stripped
 GameObject:
+  m_CorrespondingSourceObject: {fileID: 1041726102026689938, guid: d7935ce153e12ff498676f3b25d4e1d9, type: 3}
+  m_PrefabInstance: {fileID: 6757452292844296230}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1409685695
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1447433922}
-  m_Layer: 0
-  m_Name: GroundCheckPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1447433922
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1447433921}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.984, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 343963439}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!43 &1680929437
+  m_GameObject: {fileID: 1409685692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfe7b2692131126429ac7144358482e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _obstacleSpawnPrefab: {fileID: 2832299650340184021, guid: 7547032ba15270b4fb8e2fd266a4007c, type: 3}
+--- !u!43 &1433423446
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-16018(Clone)(Clone)
+  m_Name: pb_Mesh-16018(Clone)(Clone)(Clone)
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -832,6 +865,37 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1447433921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1447433922}
+  m_Layer: 0
+  m_Name: GroundCheckPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1447433922
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447433921}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.984, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 343963439}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1711138211
 GameObject:
   m_ObjectHideFlags: 0
@@ -877,7 +941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roadPrefab: {fileID: 5419132542859199916, guid: d7935ce153e12ff498676f3b25d4e1d9, type: 3}
-  initialPoolSize: 5
+  initialPoolSize: 7
   segmentLength: 20
   despawnZ: -25
 --- !u!1001 &6757452292844296230
@@ -899,10 +963,10 @@ PrefabInstance:
     - target: {fileID: 2013757004238649665, guid: d7935ce153e12ff498676f3b25d4e1d9, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1680929437}
+      objectReference: {fileID: 1433423446}
     - target: {fileID: 2013757004238649665, guid: d7935ce153e12ff498676f3b25d4e1d9, type: 3}
       propertyPath: m_VersionIndex
-      value: 2709
+      value: 2727
       objectReference: {fileID: 0}
     - target: {fileID: 4608627962559557190, guid: d7935ce153e12ff498676f3b25d4e1d9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -947,24 +1011,27 @@ PrefabInstance:
     - target: {fileID: 6070174614831674807, guid: d7935ce153e12ff498676f3b25d4e1d9, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1680929437}
+      objectReference: {fileID: 1433423446}
     - target: {fileID: 6281457468580023408, guid: d7935ce153e12ff498676f3b25d4e1d9, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1680929437}
+      objectReference: {fileID: 1433423446}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1041726102026689938, guid: d7935ce153e12ff498676f3b25d4e1d9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1409685695}
   m_SourcePrefab: {fileID: 100100000, guid: d7935ce153e12ff498676f3b25d4e1d9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 343963439}
   - {fileID: 6757452292844296230}
   - {fileID: 882829835}
   - {fileID: 1711138212}
+  - {fileID: 571722992}

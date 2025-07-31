@@ -29,6 +29,7 @@ public class RoadSpawner : MonoBehaviour
             if (activeSegments[i].transform.position.z < despawnZ)
             {
                 pool.ReturnToPool(activeSegments[i]);
+                activeSegments[i].Deactivate();
                 activeSegments.RemoveAt(i);
                 countToSpawn++;
             }
@@ -48,7 +49,6 @@ public class RoadSpawner : MonoBehaviour
 
         Vector3 spawnPos = new Vector3(0f, 0f, spawnZ);
         newSegment.Activate(spawnPos);
-        newSegment.GetComponent<RoadObstacleSpawn>().Spawn();
         activeSegments.Add(newSegment);
     }
 }
