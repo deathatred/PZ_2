@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _madeTurn = false;
         }
-        print(_madeTurn);
         if (!_madeTurn)
         {
             if (DecideLane(laneToTurn) == _currentLane && _currentLane != RoadLane.Center)
@@ -105,7 +104,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private IEnumerator MoveToPosition(Vector3 targetPosition, float finalLaneX)
     {
-        print("AM HERE");
         Vector3 startPosition = transform.position;
         float distance = Vector3.Distance(startPosition, targetPosition);
         float baseDuration = 0.25f;
@@ -115,15 +113,18 @@ public class PlayerMovement : MonoBehaviour
 
         _playerRb.linearVelocity = new Vector3(velocityX,
             _playerRb.linearVelocity.y, _playerRb.linearVelocity.z);
+
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
+            float remaining = Mathf.Abs(transform.position.x - targetPosition.x);
+            if (remaining <= 0.01f) break;
+
             yield return null;
         }
-
         _playerRb.linearVelocity = new Vector3(0f,
-           _playerRb.linearVelocity.y, _playerRb.linearVelocity.z);
-        transform.position = new Vector3(finalLaneX, transform.position.y, transform.position.z);
+            _playerRb.linearVelocity.y, _playerRb.linearVelocity.z);
+
         currentLaneX = finalLaneX;
     }
     private bool isGrounded()
