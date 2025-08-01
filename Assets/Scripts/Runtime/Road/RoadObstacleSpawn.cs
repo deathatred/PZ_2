@@ -23,11 +23,11 @@ public class RoadObstacleSpawn : MonoBehaviour
     }
     public void SpawnOnSegment(Transform segment)
     {
-        print("Spawn");
+        print("spawn");
         float randomX = 2 * Random.Range(-1, 2);
         float randomZ = Random.Range(0f, _segmentLength);
 
-        Vector3 localOffset = new Vector3(randomX, 1f, randomZ);
+        Vector3 localOffset = new Vector3(randomX, 0.5f, randomZ);
         Vector3 worldPos = segment.position + localOffset;
 
         Obstacle obstacle = _pool.Get();
@@ -39,7 +39,6 @@ public class RoadObstacleSpawn : MonoBehaviour
 
     public void RecycleAllFromSegment(Transform segment)
     {
-        print("Recycling");
         foreach (Transform child in segment)
         {
             Obstacle obstacle = child.GetComponent<Obstacle>();

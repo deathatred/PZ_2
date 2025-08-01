@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
             _playerRb.linearVelocity.y, _playerRb.linearVelocity.z);
 
         while (elapsed < duration)
-        {
+        {     
             elapsed += Time.deltaTime;
             float remaining = Mathf.Abs(transform.position.x - targetPosition.x);
             if (remaining <= 0.01f) break;
@@ -124,6 +124,9 @@ public class PlayerMovement : MonoBehaviour
         }
         _playerRb.linearVelocity = new Vector3(0f,
             _playerRb.linearVelocity.y, _playerRb.linearVelocity.z);
+        _playerRb.linearVelocity = new Vector3(0f, _playerRb.linearVelocity.y, _playerRb.linearVelocity.z);
+        yield return new WaitForFixedUpdate(); 
+        _playerRb.MovePosition(new Vector3(finalLaneX, transform.position.y, transform.position.z));
 
         currentLaneX = finalLaneX;
     }
