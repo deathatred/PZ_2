@@ -6,12 +6,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform _groundCheckPoint;
 
     private Rigidbody _playerRb;
-    private RoadLane _currentLane = RoadLane.Center;
-    private bool _madeTurn;
     private Coroutine _moveCoroutine;
-    private float currentLaneX = 0f;
+    private RoadLane _currentLane = RoadLane.Center;
+ 
+    private bool _madeTurn;
+    private bool _isJumping;
+    private bool _isStrafingLeft;
+    private bool _isStrafingRight;
     private int _playerStepWidth = 2;
-    private float _jumpForce = 5f;
+    private float currentLaneX = 0f;
+    private float _jumpForce = 6f;
     private float _jumpTimer = 0f;
     private float _jumpTimerMax = 0.5f;
 
@@ -45,19 +49,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     private void HandleJumping(bool isJumping)
-    {
+    {  
         if (isJumping && isGrounded() && _jumpTimer <= 0)
         {
             _playerRb.AddForce(Vector3.up * _jumpForce, ForceMode.VelocityChange);
+            _isJumping = true;
             _jumpTimer = _jumpTimerMax;
         }
         if (_jumpTimer > 0)
         {
-            if (_playerRb.linearVelocity.y < 0)
-            {
-                Physics.gravity *= 10f;
-            }
             _jumpTimer -= Time.deltaTime;
+        }
+        else if (_jumpTimer <= 0)
+        {
+            _isJumping = false;
         }
     }
     private void SwitchLane(float direction)
@@ -83,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         {
             StopCoroutine(_moveCoroutine);
         }
-        _moveCoroutine = StartCoroutine(MoveToPosition(targetPos, targetX));
+        _moveCoroutine = StartCoroutine(MoveToPosition(targetPos, targetX, direction));
         currentLaneX = targetX;      
     }
 
@@ -102,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
             _ => RoadLane.Center
         };
     }
-    private IEnumerator MoveToPosition(Vector3 targetPosition, float finalLaneX)
+    private IEnumerator MoveToPosition(Vector3 targetPosition, float finalLaneX, float direction)
     {
         Vector3 startPosition = transform.position;
         float distance = Vector3.Distance(startPosition, targetPosition);
@@ -114,8 +119,18 @@ public class PlayerMovement : MonoBehaviour
         _playerRb.linearVelocity = new Vector3(velocityX,
             _playerRb.linearVelocity.y, _playerRb.linearVelocity.z);
 
+        switch (direction)
+        {
+            case (-1):
+                print("TRUE");
+                _isStrafingLeft = true;
+                break;
+            case (1):
+                _isStrafingRight = true;
+                break;
+        }
         while (elapsed < duration)
-        {     
+        {
             elapsed += Time.deltaTime;
             float remaining = Mathf.Abs(transform.position.x - targetPosition.x);
             if (remaining <= 0.01f) break;
@@ -125,15 +140,29 @@ public class PlayerMovement : MonoBehaviour
         _playerRb.linearVelocity = new Vector3(0f,
             _playerRb.linearVelocity.y, _playerRb.linearVelocity.z);
         _playerRb.linearVelocity = new Vector3(0f, _playerRb.linearVelocity.y, _playerRb.linearVelocity.z);
-        yield return new WaitForFixedUpdate(); 
+        yield return new WaitForFixedUpdate();
+        _isStrafingRight = false;
+        _isStrafingLeft = false;
         _playerRb.MovePosition(new Vector3(finalLaneX, transform.position.y, transform.position.z));
-
+    
         currentLaneX = finalLaneX;
     }
     private bool isGrounded()
     {
         return Physics.Raycast(_groundCheckPoint.transform.position,
             Vector3.down, 0.2f, ~0, QueryTriggerInteraction.Ignore);
+    }
+    public bool GetIsJumping()
+    {
+        return _isJumping;
+    }
+    public bool GetIsStrafingLeft()
+    {
+        return _isStrafingLeft;
+    }
+    public bool GetIsStrafingRight()
+    {
+        return _isStrafingRight;
     }
 }
 

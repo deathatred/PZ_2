@@ -4,7 +4,6 @@ public class RoadObstacleSpawn : MonoBehaviour
 {
     [SerializeField] private Obstacle _obstacleSpawnPrefab;
     private int _poolSize = 20;
-    private float _chance = 0f;
     private float _segmentLength = 20f;
 
     private ObjectPool<Obstacle> _pool;
@@ -23,7 +22,6 @@ public class RoadObstacleSpawn : MonoBehaviour
     }
     public void SpawnOnSegment(Transform segment)
     {
-        print("spawn");
         float randomX = 2 * Random.Range(-1, 2);
         float randomZ = Random.Range(0f, _segmentLength);
 
