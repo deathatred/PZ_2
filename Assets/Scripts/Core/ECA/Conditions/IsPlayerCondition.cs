@@ -6,4 +6,5 @@ public class IsPlayerCondition : Condition
     {
         return other.CompareTag("Player");
     }
+
 }
