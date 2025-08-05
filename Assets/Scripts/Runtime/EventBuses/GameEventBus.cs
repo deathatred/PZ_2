@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class GameEventBus : MonoBehaviour
 {
+    //UI Events
     public static event Action OnRestartButtonPressed;
     public static event Action OnSettingsButtonPressed;
     public static event Action OnExitButtonPressed;
+    //Runtime Events
     public static event Action OnPlayerDead;
     public static event Action OnCoinPickup;
+    public static event Action<Transform> OnObstacleSpawn;
 
     public static void RestartPressed()
     {
@@ -28,5 +31,9 @@ public class GameEventBus : MonoBehaviour
     public static void CoinPickup()
     {
         OnCoinPickup?.Invoke();
+    }
+    public static void SpawnObstacle(Transform tranform)
+    {
+        OnObstacleSpawn?.Invoke(tranform);
     }
 }

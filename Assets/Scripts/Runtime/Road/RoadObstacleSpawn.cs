@@ -33,6 +33,7 @@ public class RoadObstacleSpawn : MonoBehaviour
         obstacle.transform.rotation = Quaternion.identity;
         obstacle.gameObject.SetActive(true);
         obstacle.transform.SetParent(segment);
+        GameEventBus.SpawnObstacle(obstacle.transform);
     }
 
     public void RecycleAllFromSegment(Transform segment)

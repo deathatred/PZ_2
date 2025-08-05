@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _madeTurn = false;
         }
-        if (!_madeTurn)
+        if (!_madeTurn && isGrounded())
         {
             if (DecideLane(laneToTurn) == _currentLane && _currentLane != RoadLane.Center)
             {
